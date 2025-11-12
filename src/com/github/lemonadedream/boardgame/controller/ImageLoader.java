@@ -26,19 +26,23 @@ public class ImageLoader {
         if (resourcePath == null)
             return null;
         BufferedImage image = null;
-        try {
-            // 尝试从 classpath 加载资源。为了兼容传入的路径格式，若没有前导 '/' 则自动补充。
-            // 例如传入 "resources/images/board/xxx.png" 或 "/resources/images/board/xxx.png"
-            // 都可工作。
-            InputStream is = ImageLoader.class
-                    .getResourceAsStream(resourcePath.startsWith("/") ? resourcePath : ("/" + resourcePath));
-            if (is != null) {
-                // 使用 ImageIO 读取 InputStream 为 BufferedImage
-                // ImageIO.read 会阻塞直到读取完成或抛出 IOException（例如文件损坏或格式不支持）
+        // 尝试从 classpath 加载资源。为了兼容传入的路径格式，若没有前导 '/' 则自动补充。
+        // 例如传入 "resources/images/board/xxx.png" 或 "/resources/images/board/xxx.png"
+        // 都可工作。
+        InputStream is = ImageLoader.class
+                .getResourceAsStream(resourcePath.startsWith("/") ? resourcePath : ("/" + resourcePath));
+        if (is == null) {
+            System.err.println("ImageLoader: resource not found on classpath: " + resourcePath);
+        } else {
+            try {
                 image = ImageIO.read(is);
+                if (image == null) {
+                    System.err.println("ImageLoader: ImageIO.read returned null for resource: " + resourcePath);
+                }
+            } catch (IOException e) {
+                System.err.println(
+                        "ImageLoader: IOException while reading resource: " + resourcePath + " -> " + e.getMessage());
             }
-        } catch (IOException e) {
-            // 暂时不输出异常，调用方按 null 处理。日后可改为抛出运行时异常或记录日志。
         }
         return image;
     }
