@@ -10,10 +10,10 @@ import com.github.lemonadedream.boardgame.view.component.RatioButton;
 
 public class MainPanel extends JPanel {
     // 创建主界面按钮组件 - 使用RatioButton，宽度400，透明度50%（2x2布局需要小一点的按钮）
-    RatioButton beginButton = new RatioButton("开始", 400, 0.5f);
-    RatioButton settingButton = new RatioButton("设置", 400, 0.5f);
-    RatioButton achivementButton = new RatioButton("成就", 400, 0.5f);
-    RatioButton closeButton = new RatioButton("退出", 400, 0.5f);
+    RatioButton beginButton = new RatioButton("开始", 400, 0.85f);
+    RatioButton settingButton = new RatioButton("设置", 400, 0.85f);
+    RatioButton achivementButton = new RatioButton("成就", 400, 0.85f);
+    RatioButton closeButton = new RatioButton("退出", 400, 0.85f);
 
     // 背景图片
     private BufferedImage backgroundImage;
@@ -47,7 +47,7 @@ public class MainPanel extends JPanel {
     // 初始化函数,给按钮进行排版
     public void init() {
         // 加载背景图片
-        backgroundImage = ImageLoader.load("resources/images/outerbackground/helektra_bath.png");
+        backgroundImage = ImageLoader.load("resources/images/outerbackground/water.jpg");
         // 设置按钮字体
         setButtonFonts();
         // 调用按钮绑定切换功能的函数

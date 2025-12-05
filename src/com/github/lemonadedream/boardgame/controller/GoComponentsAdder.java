@@ -115,15 +115,15 @@ public class GoComponentsAdder {
         topBar = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
         topBar.setOpaque(false);
 
-        leftButton = new RatioButton("悔棋", 100, 0.5f);
+        leftButton = new RatioButton("悔棋", 100, 0.85f);
         leftButton.setActionCommand("undo"); // 对局模式命令
         leftButton.setFont(new Font("微软雅黑", Font.BOLD, 16)); // 设置字体
 
-        middleButton = new RatioButton("退出", 100, 0.5f);
+        middleButton = new RatioButton("退出", 100, 0.85f);
         middleButton.setActionCommand("exit");
         middleButton.setFont(new Font("微软雅黑", Font.BOLD, 16)); // 设置字体
 
-        rightButton = new RatioButton("认输", 100, 0.5f);
+        rightButton = new RatioButton("认输", 100, 0.85f);
         rightButton.setActionCommand("surrender"); // 对局模式命令
         rightButton.setFont(new Font("微软雅黑", Font.BOLD, 16)); // 设置字体
 
@@ -135,15 +135,15 @@ public class GoComponentsAdder {
         bottomBar = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
         bottomBar.setOpaque(false);
 
-        RatioButton prevMusicBtn = new RatioButton("上一首", 100, 0.5f);
+        RatioButton prevMusicBtn = new RatioButton("上一首", 100, 0.85f);
         prevMusicBtn.setActionCommand("music_prev");
         prevMusicBtn.setFont(new Font("微软雅黑", Font.BOLD, 16));
 
-        RatioButton muteMusicBtn = new RatioButton("静音", 100, 0.5f);
+        RatioButton muteMusicBtn = new RatioButton("静音", 100, 0.85f);
         muteMusicBtn.setActionCommand("music_mute");
         muteMusicBtn.setFont(new Font("微软雅黑", Font.BOLD, 16));
 
-        RatioButton nextMusicBtn = new RatioButton("下一首", 100, 0.5f);
+        RatioButton nextMusicBtn = new RatioButton("下一首", 100, 0.85f);
         nextMusicBtn.setActionCommand("music_next");
         nextMusicBtn.setFont(new Font("微软雅黑", Font.BOLD, 16));
 
@@ -202,7 +202,7 @@ public class GoComponentsAdder {
 
         JPanel chatInput = new JPanel(new BorderLayout(4, 4));
         inputField = new JTextField();
-        sendBtn = new RatioButton("发送", 100, 0.5f);
+        sendBtn = new RatioButton("发送", 100, 0.85f);
         sendBtn.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 
         // 绑定发送按钮事件

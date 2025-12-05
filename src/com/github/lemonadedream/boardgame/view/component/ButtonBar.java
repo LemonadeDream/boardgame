@@ -19,7 +19,7 @@ public class ButtonBar {
         bar.setOpaque(false);
         Font buttonFont = new Font("微软雅黑", Font.PLAIN, 16); // 设置按钮字体
         for (String text : buttonTexts) {
-            RatioButton btn = new RatioButton(text, 100, 0.5f);
+            RatioButton btn = new RatioButton(text, 100, 0.85f);
             btn.setFont(buttonFont); // 应用字体
             bar.add(btn);
         }

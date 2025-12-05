@@ -67,13 +67,13 @@ public class SkinChooser {
     private void registerDefaultPresets() {
         // 注册默认的棋子皮肤预设
         stonePresets.put("default",
-                new SkinPreset("resources/images/stones/pic1.png", "resources/images/stones/white.png"));
+                new SkinPreset("resources/images/stones/black.png", "resources/images/stones/white.png"));
         stonePresets.put("green_lightblue",
-                new SkinPreset("resources/images/stones/pic_green.png", "resources/images/stones/pic_lightblue.png"));
+                new SkinPreset("resources/images/stones/grassGreen.png", "resources/images/stones/blueTile.png"));
         stonePresets.put("red_pureblue",
-                new SkinPreset("resources/images/stones/pic_red.png", "resources/images/stones/pic_lightblue.png"));
+                new SkinPreset("resources/images/stones/red.png", "resources/images/stones/blueTile.png"));
         stonePresets.put("pr_white",
-                new SkinPreset("resources/images/stones/pic_pr.png", "resources/images/stones/white.png"));
+                new SkinPreset("resources/images/stones/purple.png", "resources/images/stones/white.png"));
     }
 
     // 按预设key设置棋子皮肤
@@ -172,8 +172,8 @@ public class SkinChooser {
             case "default":
                 currentBackgroundPath = "resources/images/board/goBackground.jpg";
                 break;
-            case "ano":
-                currentBackgroundPath = "resources/images/board/AnobackGround.png";
+            case "color":
+                currentBackgroundPath = "resources/images/board/colorBackground.jpg";
                 break;
             default:
                 System.out.println("未知的背景预设: " + presetKey);

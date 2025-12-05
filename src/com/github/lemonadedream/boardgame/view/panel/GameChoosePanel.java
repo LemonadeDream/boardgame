@@ -10,8 +10,8 @@ import com.github.lemonadedream.boardgame.view.component.RatioButton;
 
 public class GameChoosePanel extends JPanel {
     // 创建游戏选择界面按钮组件 - 2个按钮竖着排，使用500宽度
-    RatioButton goChoose = new RatioButton("围棋游戏", 500, 0.5f);
-    RatioButton backButton = new RatioButton("返回", 500, 0.5f);
+    RatioButton goChoose = new RatioButton("围棋游戏", 500, 0.85f);
+    RatioButton backButton = new RatioButton("返回", 500, 0.85f);
 
     // 背景图片
     private BufferedImage backgroundImage;

@@ -55,22 +55,22 @@ public class GoChoosePanel extends JPanel {
 
     private void initComponents() {
         // 初始化皮肤预设按钮 - 200宽度
-        preset1Button = new RatioButton("预设1: 默认", 200, 0.5f);
-        preset2Button = new RatioButton("预设2: 绿蓝", 200, 0.5f);
-        preset3Button = new RatioButton("预设3: 红蓝", 200, 0.5f);
-        preset4Button = new RatioButton("预设4: 紫白", 200, 0.5f);
+        preset1Button = new RatioButton("预设1: 默认", 200, 0.85f);
+        preset2Button = new RatioButton("预设2: 绿蓝", 200, 0.85f);
+        preset3Button = new RatioButton("预设3: 红蓝", 200, 0.85f);
+        preset4Button = new RatioButton("预设4: 紫白", 200, 0.85f);
 
         // 初始化棋盘预设按钮 - 200宽度
-        boardPreset1Button = new RatioButton("默认棋盘", 200, 0.5f);
-        boardPreset2Button = new RatioButton("无色棋盘", 200, 0.5f);
+        boardPreset1Button = new RatioButton("默认棋盘", 200, 0.85f);
+        boardPreset2Button = new RatioButton("无色棋盘", 200, 0.85f);
 
         // 初始化背景预设按钮 - 200宽度
-        bgPreset1Button = new RatioButton("默认背景", 200, 0.5f);
-        bgPreset2Button = new RatioButton("Ano背景", 200, 0.5f);
+        bgPreset1Button = new RatioButton("默认背景", 200, 0.85f);
+        bgPreset2Button = new RatioButton("Ano背景", 200, 0.85f);
 
         // 初始化透明度选项按钮 - 200宽度
-        opacityFullButton = new RatioButton("不透明", 200, 0.5f);
-        opacity80Button = new RatioButton("80%透明", 200, 0.5f);
+        opacityFullButton = new RatioButton("不透明", 200, 0.85f);
+        opacity80Button = new RatioButton("80%透明", 200, 0.85f);
 
         // 绑定预设按钮事件
         preset1Button.addActionListener(e -> {
@@ -126,8 +126,8 @@ public class GoChoosePanel extends JPanel {
 
         bgPreset2Button.addActionListener(e -> {
             if (skinChooser != null) {
-                skinChooser.setBackgroundPreset("ano");
-                JOptionPane.showMessageDialog(this, "已选择Ano背景，进入游戏后生效", "提示", JOptionPane.INFORMATION_MESSAGE);
+                skinChooser.setBackgroundPreset("color");
+                JOptionPane.showMessageDialog(this, "已选择color背景, 进入游戏后生效", "提示", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
@@ -147,7 +147,7 @@ public class GoChoosePanel extends JPanel {
         });
 
         // 初始化开始游戏按钮 - 200宽度
-        startGameButton = new RatioButton("进入围棋游戏", 200, 0.5f);
+        startGameButton = new RatioButton("进入围棋游戏", 200, 0.85f);
         startGameButton.setFont(new Font("微软雅黑", Font.BOLD, 20));
         startGameButton.addActionListener(e -> MainWindow.getInstance().switchPanel(e));
 

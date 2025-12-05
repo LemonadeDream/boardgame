@@ -13,7 +13,7 @@ public class RatioButton extends JButton {
     private static BufferedImage buttonBackground = null;
     private int buttonWidth;
     private int buttonHeight;
-    private float backgroundOpacity = 0.5f; // 默认背景透明度50%
+    private float backgroundOpacity = 0.85f; // 默认背景不透明度85%
 
     /**
      * 创建一个25:16比例的按钮
@@ -22,7 +22,7 @@ public class RatioButton extends JButton {
      * @param width 按钮宽度
      */
     public RatioButton(String text, int width) {
-        this(text, width, 0.5f);
+        this(text, width, 0.85f);
     }
 
     /**
@@ -40,7 +40,7 @@ public class RatioButton extends JButton {
 
         // 加载按钮背景图片
         if (buttonBackground == null) {
-            buttonBackground = ImageLoader.load("resources/images/buttonbackground/ever0307.png");
+            buttonBackground = ImageLoader.load("resources/images/buttonbackground/tiled.jpg");
         }
 
         initButton();

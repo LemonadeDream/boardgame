@@ -11,10 +11,10 @@ import com.github.lemonadedream.boardgame.view.component.RatioButton;
 
 public class SettingPanel extends JPanel {
     // 创建按钮组件 - 使用200宽度形成2x2布局
-    RatioButton backButton = new RatioButton("返回", 200, 0.5f);
-    RatioButton muteButton = new RatioButton("静音", 200, 0.5f);
-    RatioButton previousButton = new RatioButton("上一首", 200, 0.5f);
-    RatioButton nextButton = new RatioButton("下一首", 200, 0.5f);
+    RatioButton backButton = new RatioButton("返回", 200, 0.85f);
+    RatioButton muteButton = new RatioButton("静音", 200, 0.85f);
+    RatioButton previousButton = new RatioButton("上一首", 200, 0.85f);
+    RatioButton nextButton = new RatioButton("下一首", 200, 0.85f);
 
     // 背景图片
     private BufferedImage backgroundImage;
