@@ -1,2 +1,2 @@
 # boardgame
-一款基于Java的五子棋小游戏
+一款基于Java的围棋小游戏
