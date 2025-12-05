@@ -8,6 +8,9 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import com.github.lemonadedream.boardgame.view.MainWindow;
+import com.github.lemonadedream.boardgame.controller.network.NetControllerImpl;
+import javax.swing.SwingUtilities;
+import com.github.lemonadedream.boardgame.module.GoGameModel.GoLogic.GoPlaceProcessor;
 import com.github.lemonadedream.boardgame.controller.GoBoardMouseController;
 import com.github.lemonadedream.boardgame.controller.GoComponentsAdder;
 import com.github.lemonadedream.boardgame.controller.GoGameButtonController;
@@ -37,6 +40,8 @@ public class GoPanel extends BoardgamePanel {
     private GoComponentsAdder componentsAdder;
     // 鼠标控制器引用
     private GoBoardMouseController mouseController;
+    // 网络适配器(若启用网络模式, 通过 MainWindow/ConnectionDialog 注入)
+    private NetControllerImpl netController;
     // 复盘控制器
     private ReplayController replayController;
     // 当前模式
@@ -72,6 +77,38 @@ public class GoPanel extends BoardgamePanel {
         GoGameButtonController gameController = new GoGameButtonController(MainWindow.getInstance(), this,
                 componentsAdder);
         componentsAdder.bindButtonListener(gameController);
+    }
+
+    /**
+     * 注入网络控制器, 供 NetController 将远端落子应用到本地面板
+     */
+    public void setNetController(NetControllerImpl nc) {
+        this.netController = nc;
+        if (this.mouseController != null) {
+            this.mouseController.setNetController(nc);
+        }
+    }
+
+    /**
+     * 在接收到服务器广播后调用, 在 EDT 上执行落子应用
+     * 本方法尽量复用现有的落子路径以保证状态一致
+     */
+    public void applyRemoteMove(int x, int y, int color) {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                GoPlaceProcessor processor = new GoPlaceProcessor(boardModel);
+                int res = processor.check(x, y, color, 1);
+                if (res == 0) {
+                    // 成功应用, 刷新视图并更新信息
+                    refreshBoard();
+                    updateGameInfo(false);
+                } else {
+                    System.err.println("applyRemoteMove failed: code=" + res);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     /**

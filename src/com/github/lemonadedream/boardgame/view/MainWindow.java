@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 import com.github.lemonadedream.boardgame.controller.MusicPlayer;
+import com.github.lemonadedream.boardgame.controller.network.NetControllerImpl;
+import com.github.lemonadedream.boardgame.controller.network.NetworkManager;
+import com.github.lemonadedream.boardgame.controller.network.ConnectionDialogImpl;
 import com.github.lemonadedream.boardgame.view.panel.AchievementPanel;
 import com.github.lemonadedream.boardgame.view.panel.GameChoosePanel;
 import com.github.lemonadedream.boardgame.view.panel.MainPanel;
@@ -106,6 +109,28 @@ public class MainWindow extends JFrame {
 
         // 创建新的游戏面板
         goPanel = GoPanel.getGoPanel();
+
+        // ===== 网络启动逻辑（完整实现）=====
+        // 弹出连接对话框让用户选择 Server/Client 模式
+        ConnectionDialogImpl dlg = new ConnectionDialogImpl(this);
+        ConnectionDialogImpl.ConnectionConfig cfg = dlg.showDialog();
+
+        if (cfg != null) {
+            if (cfg.startServer) {
+                // 启动服务器模式
+                NetworkManager.getInstance().startServer(cfg.port);
+                System.out.println("[MainWindow] Server started on port " + cfg.port);
+            } else {
+                // 启动客户端模式
+                NetworkManager.getInstance().startClient(cfg.host, cfg.port, cfg.playerId);
+                System.out.println("[MainWindow] Client connecting to " + cfg.host + ":" + cfg.port);
+
+                // 创建网络控制器并注入到 GoPanel
+                NetControllerImpl nc = new NetControllerImpl(goPanel, cfg.playerId);
+                goPanel.setNetController(nc);
+            }
+        }
+        // ====================================
 
         // 将皮肤选择器绑定到新创建的 GoPanel
         skinChooser.setGoPanel(goPanel);

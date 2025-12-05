@@ -9,6 +9,8 @@ import com.github.lemonadedream.boardgame.view.panel.mainGamePanel.GoPanel;
 import com.github.lemonadedream.boardgame.view.component.TimePiece;
 import com.github.lemonadedream.boardgame.module.GoGameModel.GoComponents.GoBoard;
 import com.github.lemonadedream.boardgame.module.GoGameModel.GoLogic.GoPlaceProcessor;
+import com.github.lemonadedream.boardgame.controller.network.NetControllerImpl;
+import com.github.lemonadedream.boardgame.controller.network.NetworkManager;
 import com.github.lemonadedream.boardgame.module.GoGameModel.GoLogic.GoWinLose;
 
 /**
@@ -52,6 +54,8 @@ public class GoBoardMouseController extends MouseAdapter {
     private int currentColor = GoBoard.BLACK;
     // 是否已开始游戏(用于首次落子时启动计时器)
     private boolean gameStarted = false;
+    // 网络适配器引用(若启用网络模式, 由外部注入)
+    private NetControllerImpl netController = null;
 
     /**
      * 构造函数
@@ -131,14 +135,28 @@ public class GoBoardMouseController extends MouseAdapter {
 
         // 判断是否为二次点击同一位置
         if (pendingMove != null && pendingMove.x == row && pendingMove.y == col) {
-            // 二次点击确认: 执行落子并更新棋盘
-            confirmMove(row, col);
+            // 二次点击确认: 若为网络模式并注入了 NetController, 则通过网络请求落子
+            if (NetworkManager.getInstance().isNetworkMode() && netController != null) {
+                // 将请求发送到服务器, 服务器验证并广播权威落子
+                netController.requestMove(row, col);
+                // 在实际实现中应禁用本地输入并显示等待提示
+            } else {
+                // 离线/本地模式: 直接执行落子逻辑
+                confirmMove(row, col);
+            }
         } else {
             // 首次点击或点击新位置: 检查合法性
             attemptMove(row, col);
         }
 
         // 不在这里通知监听器，而是在confirmMove成功后才通知
+    }
+
+    /**
+     * 注入 NetController 以启用网络模式下的落子请求
+     */
+    public void setNetController(NetControllerImpl netController) {
+        this.netController = netController;
     }
 
     /**
